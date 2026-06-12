@@ -17,5 +17,14 @@ npm run dev
 
 ```bash
 npm run build
-npm start
 ```
+
+الملفات الثابتة تُنشأ في مجلد `out/`.
+
+## النشر على Cloudflare Pages
+
+| الإعداد | القيمة |
+|--------|--------|
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Node version | 22 |

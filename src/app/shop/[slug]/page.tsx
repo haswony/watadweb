@@ -1,16 +1,20 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShopPageContent from "@/components/ShopPageContent";
+import { createDefaultAdminState } from "@/lib/admin-defaults";
 import { FIXED_SHOP_PAGES } from "@/lib/admin-links";
 
 interface ShopPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const dynamicParams = true;
-
 export async function generateStaticParams() {
-  return Object.keys(FIXED_SHOP_PAGES).map((slug) => ({ slug }));
+  const defaults = createDefaultAdminState();
+  const slugs = new Set([
+    ...Object.keys(FIXED_SHOP_PAGES),
+    ...defaults.categories.map((c) => c.slug),
+  ]);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export default async function ShopPage({ params }: ShopPageProps) {
